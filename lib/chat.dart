@@ -16,14 +16,14 @@ class Chat extends StatelessWidget {
   final String peerId;
   final String peerAvatar;
 
-  Chat({Key key, @required this.peerId, @required this.peerAvatar}) : super(key: key);
+  Chat({Key key,  this.peerId,  this.peerAvatar}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          'CHAT',
+          'Chat',
           style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -82,7 +82,7 @@ class ChatScreenState extends State<ChatScreen> {
 
   void onFocusChange() {
     if (focusNode.hasFocus) {
-      // Hide sticker when keyboard appear
+      // Oculta a figurinha quando o teclado aparece
       setState(() {
         isShowSticker = false;
       });
@@ -115,7 +115,7 @@ class ChatScreenState extends State<ChatScreen> {
   }
 
   void getSticker() {
-    // Hide keyboard when sticker appear
+    // Oculta o teclado quando a figurinha aparece
     focusNode.unfocus();
     setState(() {
       isShowSticker = !isShowSticker;
@@ -142,7 +142,6 @@ class ChatScreenState extends State<ChatScreen> {
   }
 
   void onSendMessage(String content, int type) {
-    // type: 0 = text, 1 = image, 2 = sticker
     if (content.trim() != '') {
       textEditingController.clear();
 
@@ -172,11 +171,11 @@ class ChatScreenState extends State<ChatScreen> {
 
   Widget buildItem(int index, DocumentSnapshot document) {
     if (document['idFrom'] == id) {
-      // Right (my message)
+      // Direita - minha mensagem
       return Row(
         children: <Widget>[
           document['type'] == 0
-              // Text
+              // Texto
               ? Container(
                   child: Text(
                     document['content'],
@@ -188,7 +187,7 @@ class ChatScreenState extends State<ChatScreen> {
                   margin: EdgeInsets.only(bottom: isLastMessageRight(index) ? 20.0 : 10.0, right: 10.0),
                 )
               : document['type'] == 1
-                  // Image
+                  // Imagem
                   ? Container(
                       child: FlatButton(
                         child: Material(
@@ -235,7 +234,7 @@ class ChatScreenState extends State<ChatScreen> {
                       ),
                       margin: EdgeInsets.only(bottom: isLastMessageRight(index) ? 20.0 : 10.0, right: 10.0),
                     )
-                  // Sticker
+                  // Figurinha
                   : Container(
                       child: new Image.asset(
                         'images/${document['content']}.gif',
@@ -249,7 +248,7 @@ class ChatScreenState extends State<ChatScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
       );
     } else {
-      // Left (peer message)
+      // Esquerda (mensagem do mesmo nível)
       return Container(
         child: Column(
           children: <Widget>[
@@ -348,7 +347,7 @@ class ChatScreenState extends State<ChatScreen> {
               ],
             ),
 
-            // Time
+            // tempo
             isLastMessageLeft(index)
                 ? Container(
                     child: Text(
@@ -403,13 +402,13 @@ class ChatScreenState extends State<ChatScreen> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              // List of messages
+              // Lista de mensagens
               buildListMessage(),
 
               // Sticker
               (isShowSticker ? buildSticker() : Container()),
 
-              // Input content
+              // Conteúdo de entrada
               buildInput(),
             ],
           ),
@@ -549,7 +548,7 @@ class ChatScreenState extends State<ChatScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          // Button send image
+          // Botão de envio de imagem
           Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 1.0),
@@ -573,7 +572,7 @@ class ChatScreenState extends State<ChatScreen> {
             color: Colors.white,
           ),
 
-          // Edit text
+          // Texto - mensagem
           Flexible(
             child: Container(
               child: TextField(
@@ -588,7 +587,7 @@ class ChatScreenState extends State<ChatScreen> {
             ),
           ),
 
-          // Button send message
+          // Botão -envia a mensagem
           Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 8.0),

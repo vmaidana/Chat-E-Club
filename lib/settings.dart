@@ -64,7 +64,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     controllerNickname = new TextEditingController(text: nickname);
     controllerAboutMe = new TextEditingController(text: aboutMe);
 
-    // Force refresh input
+  
     setState(() {});
   }
 

@@ -13,7 +13,7 @@ import 'package:flutter_chat_demo/login.dart';
 import 'package:flutter_chat_demo/settings.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 void main() => runApp(Eclub());
 
@@ -32,7 +32,7 @@ class MainScreenState extends State<MainScreen> {
   final String currentUserId;
   final FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+  // final GoogleSignIn googleSignIn = GoogleSignIn();
 
   bool isLoading = false;
   List<Choice> choices = const <Choice>[
@@ -89,7 +89,7 @@ class MainScreenState extends State<MainScreen> {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       Platform.isAndroid ? 'com.dfa.flutterchatdemo': 'com.duytq.flutterchatdemo',
       'Flutter chat demo',
-      'your channel description',
+      '',
       playSound: true,
       enableVibration: true,
       importance: Importance.Max,
@@ -198,8 +198,8 @@ class MainScreenState extends State<MainScreen> {
     });
 
     await FirebaseAuth.instance.signOut();
-    await googleSignIn.disconnect();
-    await googleSignIn.signOut();
+    // await googleSignIn.disconnect();
+    // await googleSignIn.signOut();
 
     this.setState(() {
       isLoading = false;
@@ -214,7 +214,7 @@ class MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'MAIN',
+          'Chat Room',
           style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

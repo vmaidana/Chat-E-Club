@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:teguiotea/home.dart';
-// import 'home.dart';
+
 
 class Cadastro extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new CadastroState();
 }
-
-  //var formKey = GlobalKey<FormState>();
-
-
-
 class CadastroState extends State<Cadastro> {
 
 
@@ -28,9 +21,7 @@ class CadastroState extends State<Cadastro> {
 _cadastro() async {
   try {
     await FirebaseAuth.instance
-        // .signInWithEmailAndPassword(email: email, password: senha);
         .createUserWithEmailAndPassword(
-            //nome: nome,
             email: email,
             password: senha);
 
@@ -40,8 +31,7 @@ _cadastro() async {
     _info.displayName = nome;
     
     _user.updateProfile(_info);
-    //telefone: telefone);
-    // MaterialPageRoute(builder: (context) => Home());
+    
     Navigator.of(_context).pop();
 
   } on Exception catch (e) {
@@ -59,10 +49,10 @@ _cadastro() async {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Cadastro"),
-        backgroundColor: Colors.black,
+        title: Text("Register"),
+        backgroundColor: Colors.blue,
       ),
-      backgroundColor: Colors.lightBlue[200],
+      backgroundColor: Colors.white,
         body: new Container(
           padding: new EdgeInsets.all(20.0),
             child: new Form(
@@ -71,40 +61,33 @@ _cadastro() async {
             children: [
               new TextFormField(
                 decoration: new InputDecoration(
-                  hintText: 'Digite seu Nome',
-                  labelText: 'Nome'
+                  hintText: 'Type your Name',
+                  labelText: 'Name'
                 ),
                 autovalidate: true,
                 validator: (value) {
                 if(value.length == 0)
-                  return "Campo obrigatório";
+                  return "Required";
                 if(value.length < 3)
-                 return "Mínimo 3 caracteres.";
+                 return "Mínimum 3 characters.";
                  return null;
                  },
                   onSaved: (value) => nome = value,
               ),
               new TextFormField(
-                keyboardType: TextInputType.emailAddress, // Use email input type for emails.
+                keyboardType: TextInputType.emailAddress, // usa tipo email
                 decoration: new InputDecoration(
-                  hintText: 'Digite seu E-mail',
+                  hintText: 'type your e-mail',
                   labelText: 'E-mail '
                 ),
                  onSaved: (value) => email = value,
               ),
-              // new TextFormField(
-              //   keyboardType: TextInputType.phone,
-              //   decoration: new InputDecoration(
-              //     hintText: 'Digite seu Telefone',
-              //     labelText: 'Telefone'
-              //   ),
-              //   onSaved: (value) => telefone = value,
-              // ),
+              
             new TextFormField(
-                obscureText: true, // Use secure text for passwords.
+                obscureText: true, // esconder o texto da senha
                 decoration: new InputDecoration(
-                  hintText: 'Digite sua senha',
-                  labelText: 'Senha'
+                  hintText: 'type your password',
+                  labelText: 'Password'
                 ),
                 onSaved: (value) => senha = value,
               ),
@@ -112,7 +95,7 @@ _cadastro() async {
             new Container(
                 width: screenSize.width,
                 child: new RaisedButton(
-                  child: new   Text('Salvar',
+                  child: new   Text('Save',
                     style: new TextStyle(
                       color: Colors.black
                     ),
@@ -121,19 +104,6 @@ _cadastro() async {
                 formKey.currentState.save();
                 _cadastro();
               },
-              //{
-              //if(formKey.currentState.validate())
-              //{
-                //formKey.currentState.save();
-
-                  //Firestore.instance.collection('usuarios')
-                    //.add({'nome': nome,
-                          //'email': email,
-                          //'telefone': telefone,
-                          //'senha': senha});
-                  //Navigator.of(context).pop();
-                  //}
-                //},
 
                   color: Colors.grey,
                 ),
